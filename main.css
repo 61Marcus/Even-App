@@ -1,0 +1,211 @@
+body {
+    position: relative;
+    background-color: #5f1818;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+    position: fixed;
+    width: 100%;
+    z-index: 20;
+    color: white;
+    margin-top: 17px;
+}
+
+.header h1 {
+    font-size: larger;
+    margin: 0;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-image {
+    width: 50px;
+    height: auto;
+    z-index: 10;
+    filter: drop-shadow(2px 2px 2px #222);
+}
+
+.bell-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.avatar {
+    margin-left: 10px;
+    width: 30px;
+    height: auto;
+}
+
+.username {
+    font-size: 3rem;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.chevron-down {
+    width: 24px;
+    height: 24px;
+    margin-right: 9vh;
+}
+
+.sidebar {
+    width: 250px;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+    background-color: #33333300;
+    padding-top: 20px;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.nav-menu ul li {
+    width: 100%;
+}
+
+.nav-menu ul li a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.nav-menu ul li a:hover {
+    background-color: #58585828;
+}
+
+.wrapper {
+    top: 10.5vh;
+    left: 28vh;
+    padding: 20px;
+    background-color: #1f1f1f28;
+    height: 400px;
+    width: 1402px;
+    z-index: 2;
+    position: relative;
+    color: white;
+    border-radius: 20px;
+}
+
+.main-nav {
+    font-size: 1rem;
+    text-align: start;
+}
+
+.filter-container {
+    margin: 20px 0;
+}
+
+.filter-container input[type="date"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.filter-container button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.filter-container button:hover {
+    background-color: #555;
+}
+
+.ticket-list-wrapper {
+    margin-top: 20px;
+}
+
+.ticket-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.ticket-list li {
+    background-color: #33333350;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-list li span {
+    color: white;
+}
+
+.ticket-status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.ticket-status.pending {
+    background-color: orange;
+}
+
+.ticket-status.completed {
+    background-color: green;
+}
+
+.ticket-status.cancelled {
+    background-color: red;
+}
+
+.color1 {
+    height: 1000px;
+    width: 1400px;
+    background-image: radial-gradient(closest-side, #8a0000, #5F1818);
+    position: fixed;
+    top: -29rem;
+    left: -20rem;
+    z-index: 1;
+}
+
+.color2 {
+    height: 1000px;
+    width: 1000px;
+    background-image: radial-gradient(closest-side, #630f00af, #5F1818);
+    position: fixed;
+    bottom: -20rem;
+    right: -20rem;
+    z-index: 1;
+}
