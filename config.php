@@ -2,7 +2,7 @@
 // config.php
 $servername = "localhost";
 $username = "root";
-$password = "testesql";
+$password = "";
 $dbname = "even_app";
 
 // Cria a conexão
