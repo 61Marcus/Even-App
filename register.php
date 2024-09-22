@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO usuarios (email, senha, nome, registro) VALUES ('$email', '$senha', '$nome', '$registro')";
 
         if ($mysqli->query($sql) === TRUE) {
-            header("Location: main.php"); // Redireciona para página de sucesso
+            header("Location: index.php"); // Redireciona para página de sucesso
             exit();
         } else {
             $error = "Erro ao registrar: " . $mysqli->error; // Para ajudar a identificar o problema

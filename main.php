@@ -1,6 +1,28 @@
 <?php
 include 'config.php';
 include('protect.php');
+
+// Obtém a data e o termo de pesquisa da URL
+$selectedDate = isset($_GET['date']) ? $_GET['date'] : '';
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Construir a consulta SQL
+$query = "SELECT * FROM orders WHERE 1=1"; // Começa com um verdadeiro
+
+// Adiciona filtros de data se a data estiver definida
+if ($selectedDate) {
+    $query .= " AND DATE(created_at) = '$selectedDate'";
+}
+
+// Adiciona filtro de pesquisa se o termo de pesquisa estiver definido
+if ($searchTerm) {
+    $query .= " AND (ticket LIKE '%$searchTerm%' OR registro LIKE '%$searchTerm%')";
+}
+
+// Ordena os resultados por data de criação em ordem decrescente
+$query .= " ORDER BY created_at DESC";
+
+$result = $mysqli->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +41,6 @@ include('protect.php');
         </div>
         <div class="header-right">
             <img src="./img/Bell.svg" alt="bell-icon" class="bell-icon" id="bell-button">
-            
-            <!-- Dropdown de Notificações -->
             <div id="notification-menu" class="dropdown-menu">
                 <h4>Notificações</h4>
                 <ul id="notification-list">
@@ -29,12 +49,8 @@ include('protect.php');
             </div>
 
             <img src="img/avatar.svg" alt="avatar" class="avatar">
-            <h1 class="username">
-                <?php echo $_SESSION['nome']; ?>
-            </h1>
+            <h1 class="username"><?php echo $_SESSION['nome']; ?></h1>
             <input type="image" src="img/Icons - chevron-down.svg" alt="chevron-down" class="chevron-down" id="dropdown-button"/>
-
-            <!-- Menu Dropdown -->
             <div id="dropdown-menu" class="dropdown-menu">
                 <ul>
                     <li><a href="profile.php">Configurações</a></li>
@@ -56,19 +72,37 @@ include('protect.php');
         </nav>
     </div>
 
-
     <div class="wrapper">
+        <nav class="main-nav">
+            <span>Lista de pedidos</span>
+            <div class="button-container">
+                <button id="make-order-button">Fazer Pedido</button>
+            </div>
+        </nav>
         <div class="filter-container">
-            <button id="make-order-button">Fazer Pedido</button>
-        </div>
-    <nav class="main-nav">PEDIDOS</nav>
-        <div class="filter-container">
-            <input type="date" id="filter-date">
-            <button id="filter-button">Filtrar</button>
+            <div class="filter-left">
+                <input type="date" id="filter-date">
+                <button id="filter-button">Filtrar</button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-ticket" placeholder="Buscar por Ticket ou Registro">
+                <button id="search-button">Pesquisar</button>
+            </div>
         </div>
         <div class="ticket-list-wrapper">
-            <h2>Lista de Pedidos</h2>
             <ul class="ticket-list" id="ticket-list">
+                <?php if ($result && $result->num_rows > 0): ?>
+                    <?php while ($order = $result->fetch_assoc()): ?>
+                        <li>
+                            <span>Ticket: <?php echo $order['ticket']; ?></span>
+                            <span>Registro: <?php echo $order['registro']; ?></span>
+                            <span>Data: <?php echo $order['created_at']; ?></span>
+                            <span>Local de Entrega: <?php echo $order['delivery_location']; ?></span>
+                        </li>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <li>Nenhum pedido encontrado.</li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

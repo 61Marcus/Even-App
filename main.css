@@ -1,30 +1,3 @@
-#notification-menu {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    top: 60px;
-    right: 80px; /* Ajuste conforme necessário */
-    border-radius: 5px;
-    padding: 10px;
-}
-
-#notification-menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-#notification-menu ul li {
-    padding: 8px 12px;
-    color: #333;
-}
-
-#notification-menu ul li:hover {
-    background-color: #ddd;
-}
 body {
     position: relative;
     background-color: #5f1818;
@@ -88,11 +61,12 @@ body {
     margin-right: 9vh;
 }
 
-.dropdown-menu {
+.dropdown-menu,
+#notification-menu {
     display: none; /* Esconde o menu por padrão */
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 30; /* Certifique-se de que o z-index seja maior que o header */
     top: 60px; /* Ajuste conforme a posição do seu header */
@@ -101,23 +75,27 @@ body {
     padding: 10px;
 }
 
-.dropdown-menu ul {
+.dropdown-menu ul,
+#notification-menu ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.dropdown-menu ul li {
+.dropdown-menu ul li,
+#notification-menu ul li {
     padding: 8px 12px;
 }
 
-.dropdown-menu ul li a {
+.dropdown-menu ul li a,
+#notification-menu ul li {
     text-decoration: none;
     color: #333;
     display: block;
 }
 
-.dropdown-menu ul li a:hover {
+.dropdown-menu ul li a:hover,
+#notification-menu ul li:hover {
     background-color: #ddd;
 }
 
@@ -176,23 +154,36 @@ body {
 }
 
 .main-nav {
-    font-size: 1rem;
+    font-size: 2rem; /* Aumenta o tamanho da fonte */
     text-align: start;
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
+    display: flex; /* Usar flexbox para alinhamento */
+    justify-content: space-between; /* Espaço entre o título e o botão */
 }
 
 .filter-container {
-    margin: 20px 0;
+    display: flex; /* Alinha os itens horizontalmente */
+    justify-content: space-between; /* Espaço entre os grupos */
+    margin: 20px 0; /* Espaçamento acima e abaixo do container */
 }
 
-.filter-container input[type="date"] {
+.filter-left,
+.search-container {
+    display: flex;
+    align-items: center; /* Alinha verticalmente os elementos */
+}
+
+.filter-left input[type="date"],
+.search-container input[type="text"] {
     padding: 10px;
     font-size: 1rem;
     border-radius: 5px;
     border: 1px solid #ccc;
-    margin-right: 10px;
+    margin-right: 10px; /* Espaçamento entre o campo e o botão */
 }
 
-.filter-container button {
+.filter-left button,
+.search-container button {
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
@@ -202,26 +193,15 @@ body {
     cursor: pointer;
 }
 
-.filter-container button:hover {
-    background-color: #555;
-}
-
-.filter-container #make-order-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-}
-
-.filter-container #make-order-button:hover {
+.filter-left button:hover,
+.search-container button:hover {
     background-color: #555;
 }
 
 .ticket-list-wrapper {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Para que os elementos fiquem empilhados verticalmente */
+    align-items: stretch; /* Para que todos os elementos ocupem a largura total */
 }
 
 .ticket-list {
