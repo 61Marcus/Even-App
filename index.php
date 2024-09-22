@@ -1,44 +1,60 @@
 <?php
 include 'config.php';
 
-if(isset($_POST['email']) || isset($_POST['senha'])) {
+$erro = ''; // Variável para armazenar a mensagem de erro
 
-    if(strlen(string: $_POST['email']) == 0) {
-        echo "Preencha seu e-mail";
-    } else if(strlen(string: $_POST['senha']) == 0) {
-        echo "Preencha sua senha";
+if(isset($_POST['email']) && isset($_POST['senha'])) {
+
+    if(strlen($_POST['email']) == 0) {
+        $erro = "Preencha seu e-mail ou registro";
+    } else if(strlen($_POST['senha']) == 0) {
+        $erro = "Preencha sua senha";
     } else {
 
-        $email = $mysqli->real_escape_string(string: $_POST['email']);
-        $senha = $mysqli->real_escape_string(string: $_POST['senha']);
+        $login = $mysqli->real_escape_string($_POST['email']);
+        $senha = $_POST['senha']; // A senha enviada pelo usuário, sem encriptar
 
-        $sql_code = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
-        $sql_query = $mysqli->query(query: $sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
+        // Verifica se o valor inserido é um e-mail ou um registro
+        $sql_code = "SELECT * FROM usuarios WHERE (email = '$login' OR registro = '$login') LIMIT 1";
+        $sql_query = $mysqli->query($sql_code);
 
-        $quantidade = $sql_query->num_rows;
-
-        if($quantidade == 1) {
-            
-            $usuario = $sql_query->fetch_assoc();
-
-            if(!isset($_SESSION)) {
-                session_start();
-            }
-
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nome'] = $usuario['nome'];
-
-            header(header: "Location: main.php");
-
+        if (!$sql_query) {
+            // Se a query falhar, mostra o erro
+            $erro = "Falha na execução do código SQL: " . $mysqli->error;
         } else {
-            echo "Falha ao logar! E-mail ou senha incorretos";
-        }
 
+            $quantidade = $sql_query->num_rows;
+
+            if($quantidade == 1) {
+                
+                $usuario = $sql_query->fetch_assoc();
+                // Verifica se a senha informada corresponde à senha criptografada no banco
+                if (password_verify($senha, $usuario['senha'])){
+                    session_start();
+
+                    $_SESSION['id'] = $usuario['id'];
+                    $_SESSION['nome'] = $usuario['nome'];
+                    $_SESSION['registro'] = $usuario['registro'];
+
+                    header("Location: main.php");
+                    exit();
+                } else {
+                    $erro = "Falha ao logar! E-mail, registro ou senha incorretos.";
+                }
+
+            } else {
+                // Exibe a mensagem de erro se o login falhar
+                $erro = "Falha ao logar! E-mail, registro ou senha incorretos.";
+            }
+        }
     }
 
+} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Exibe uma mensagem de erro se os campos estiverem vazios
+    $erro = "Por favor, preencha todos os campos.";
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -58,12 +74,20 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
     <div class="color2" id="color2"></div>
     <div class="nav-container">
         <div class="nav1"></div>
+        
+        <!-- Formulário de Login -->
         <form method="post" action="">
             <input class="reg" type="text" name="email" placeholder="E-mail ou registro" required>
             <div class="nav2"></div>
             <input class="psw" type="password" name="senha" placeholder="Senha" required>
             <button class="enter" type="submit">ENTRAR</button>
         </form>
+
+        <!-- Exibe a mensagem de erro se houver -->
+        <?php if(!empty($erro)): ?>
+            <p style="color: red; text-align: center;"><?php echo $erro; ?></p>
+        <?php endif; ?>
+        
     </div>
 </body>
 </html>

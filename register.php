@@ -1,31 +1,35 @@
 <?php
 include 'config.php';
 
+$error = ''; // Variável para armazenar mensagem de erro
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $registro = $_POST['registro'];
-    $senha = $_POST['senha'];
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+    $nome = $mysqli->real_escape_string($_POST['nome']);
+    $registro = $mysqli->real_escape_string($_POST['registro']);
 
-    // Anti SQL Injection
-    $registro = stripslashes($registro);
-    $senha = stripslashes($senha);
-    $registro = $mysqli->real_escape_string($registro);
-    $senha = $mysqli->real_escape_string($senha);
-
-    // Verifica se o usuário já existe
-    $sql = "SELECT id FROM users WHERE registro = '$registro'";
+    // Verifica se o e-mail ou o registro já existem
+    $sql = "SELECT * FROM usuarios WHERE email = '$email' OR registro = '$registro'";
     $result = $mysqli->query($sql);
 
-
     if ($result->num_rows > 0) {
-        $error = "Usuário já registrado";
+        // Verifica qual dos dois campos já existe e gera a mensagem de erro
+        $row = $result->fetch_assoc();
+        if ($row['email'] == $email) {
+            $error = "E-mail já registrado.";
+        } elseif ($row['registro'] == $registro) {
+            $error = "Registro já cadastrado.";
+        }
     } else {
         // Insere o novo usuário no banco de dados
-        $sql = "INSERT INTO users (registro, senha) VALUES ('$registro', '$senha')";
-        var_dump($registro,$senha);
+        $sql = "INSERT INTO usuarios (email, senha, nome, registro) VALUES ('$email', '$senha', '$nome', '$registro')";
+
         if ($mysqli->query($sql) === TRUE) {
-            // Registro bem-sucedido
+            header("Location: main.php"); // Redireciona para página de sucesso
+            exit();
         } else {
-            echo "Erro: " . $mysqli->error; // Para ajudar a identificar o problema
+            $error = "Erro ao registrar: " . $mysqli->error; // Para ajudar a identificar o problema
         }
     }
 }
@@ -50,17 +54,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="color2" id="color2"></div>
     <div class="nav-container">
         <div class="nav1"></div>
+        
+        <!-- Formulário de Registro -->
         <form method="post" action="">
-            <input class="reg" type="text" name="registro" placeholder="REGISTRO" required>
+            <input class="reg" type="text" name="email" placeholder="E-mail" required>
             <div class="nav2"></div>
-            <input class="psw" type="password" name="senha" placeholder="SENHA" required>
+            <input class="nome" type="text" name="nome" placeholder="Primeiro Nome" required>
+            <div class="nav2"></div>
+            <input class="registro" type="text" name="registro" placeholder="Registro" required>
+            <div class="nav2"></div>
+            <input class="psw" type="password" name="senha" placeholder="Senha" required>
             <button class="enter" type="submit">REGISTRAR</button>
         </form>
-        <?php if (isset($error)): ?>
-            <div class="error-message"><?php echo $error; ?></div>
-        <?php endif; ?>
-        <?php if (isset($success)): ?>
-            <div class="success-message"><?php echo $success; ?></div>
+
+        <!-- Exibir mensagem de erro, caso exista -->
+        <?php if (!empty($error)): ?>
+            <div class="error-message">
+                <?php echo $error; ?>
+            </div>
         <?php endif; ?>
     </div>
 </body>

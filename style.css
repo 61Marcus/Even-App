@@ -98,6 +98,32 @@ body {
     margin-bottom: 10px;
 }
 
+.nome {
+    width: 600px;
+    height: 40px;
+    padding: 10px;
+    background-color: rgba(51, 0, 0, 0.068);
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #ffffff;
+    box-sizing: border-box;
+    border-color: #2b030300;
+}
+
+.registro {
+    width: 600px;
+    height: 40px;
+    padding: 10px;
+    background-color: rgba(51, 0, 0, 0.068);
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #ffffff;
+    box-sizing: border-box;
+    border-color: #2b030300;
+}
+
 .reg {
     width: 600px;
     height: 40px;
@@ -133,6 +159,13 @@ body {
     border-color: #530000;
 }
 
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
 .recover {
     margin-top: 50px;
     position: fixed;
@@ -155,7 +188,7 @@ body {
 }
 
 .enter {
-    margin-top: 150px;
+    margin-top: 250px;
     position: fixed;
     top: 50%;
     left: 50%;
