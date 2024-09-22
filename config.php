@@ -1,15 +1,15 @@
 <?php
 // config.php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "even_app";
+$hostname = "localhost";
+$bancodedados = "login";
+$usuario = "root";
+$senha = "";
+
 
 // Cria a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
+$mysqli = new mysqli($hostname, $usuario, $senha, $bancodedados);
+if ($mysqli->connect_error) {
+    die ("Falha ao conectar ao banco de dados: (". $mysqli->connect_errno.")" . $mysqli->connect_error);
 
-// Checa a conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
 }
 ?>

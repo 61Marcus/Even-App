@@ -17,13 +17,13 @@ if (!isset($_SESSION['login_user'])) {
 </head>
 <body>
     <div class="header">
-        <p>Bem-vindo, <?php echo $_SESSION['login_user']; ?>!</p>
+        <p>Bem-vindo, <?php echo $_SESSION['nome']; ?>; ?>!</p>
         <a href="logout.php">LOGOUT</a>
     </div>
 
     <div class="content">
         <h1>Bem-vindo ao Even App!</h1>
-        <p>Você está logado como <?php echo $_SESSION['login_user']; ?>.</p>
+        <p>Você está logado como <?php echo $_SESSION['nome']; ?>.</p>
     </div>
 </body>
 </html>

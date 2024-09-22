@@ -1,6 +1,10 @@
 <?php
-session_start();
+
+if(!isset($_SESSION)) {
+    session_start();
+}
+
 session_destroy();
-header("location: index.html");
-exit;
+
+header("Location: index.php");
 ?>

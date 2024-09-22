@@ -8,22 +8,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Anti SQL Injection
     $registro = stripslashes($registro);
     $senha = stripslashes($senha);
-    $registro = $conn->real_escape_string($registro);
-    $senha = $conn->real_escape_string($senha);
+    $registro = $mysqli->real_escape_string($registro);
+    $senha = $mysqli->real_escape_string($senha);
 
     // Verifica se o usuário já existe
     $sql = "SELECT id FROM users WHERE registro = '$registro'";
-    $result = $conn->query($sql);
+    $result = $mysqli->query($sql);
+
 
     if ($result->num_rows > 0) {
         $error = "Usuário já registrado";
     } else {
         // Insere o novo usuário no banco de dados
         $sql = "INSERT INTO users (registro, senha) VALUES ('$registro', '$senha')";
-        if ($conn->query($sql) === TRUE) {
-            $success = "Registro bem-sucedido! Você pode <a href='index.html'>fazer login</a> agora.";
+        var_dump($registro,$senha);
+        if ($mysqli->query($sql) === TRUE) {
+            // Registro bem-sucedido
         } else {
-            $error = "Erro ao registrar: " . $conn->error;
+            echo "Erro: " . $mysqli->error; // Para ajudar a identificar o problema
         }
     }
 }
@@ -40,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="header">
         <p>JÁ REGISTRADO?</p>
-        <a href="index.html">LOGIN</a>
+        <a href="index.php">LOGIN</a>
     </div>
 
     <img src="img/LEA-98acd8c0.png" alt="LEA Image" class="main-image">
