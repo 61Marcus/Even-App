@@ -20,6 +20,7 @@ window.addEventListener('click', function(event) {
         dropdownMenu.style.display = 'none';
     }
 });
+
 // Toggle notification menu on bell-icon click
 document.getElementById('bell-button').addEventListener('click', function(event) {
     event.stopPropagation();
@@ -72,3 +73,12 @@ document.getElementById('make-order-button').addEventListener('click', function(
     window.location.href = 'create_order.php'; // Redirect to the order page
 });
 
+document.getElementById('filter-button').addEventListener('click', function() {
+    const selectedDate = document.getElementById('filter-date').value;
+    window.location.href = `main.php?date=${selectedDate}`;
+});
+
+document.getElementById('search-button').addEventListener('click', function() {
+    const searchTerm = document.getElementById('search-ticket').value; // Corrigido aqui
+    window.location.href = `main.php?search=${searchTerm}`;
+});

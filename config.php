@@ -12,4 +12,5 @@ if ($mysqli->connect_error) {
     die ("Falha ao conectar ao banco de dados: (". $mysqli->connect_errno.")" . $mysqli->connect_error);
 
 }
+
 ?>
