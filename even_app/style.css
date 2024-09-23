@@ -1,0 +1,212 @@
+body {
+    position: relative;
+    background-color: #5f1818;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 15px;
+    z-index: 20;
+    color: white;
+    background-color: #5F1818;
+}
+
+.header p, .header a {
+    margin: 0;
+}
+
+.header p {
+    text-align: center;
+    height: auto;
+    font-family: Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.header a {
+    text-align: center;
+    height: auto;
+    font-weight: 700;
+    color: white;
+    font-family: Helvetica;
+    text-decoration: none;
+    font-size: 18px;
+    border: solid 1.7px white;
+    border-radius: 2px;
+    padding: 12px 24px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;   
+}
+
+.main-image {
+    display: block;
+    max-width: 8%;
+    height: auto;
+    margin: 150px auto 0;
+    z-index: 10;
+    position: relative;
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
+}
+
+.color1 {
+    height: 1000px;
+    width: 1400px;
+    background-image: radial-gradient(closest-side, #8a0000, #5F1818);
+    position: fixed;
+    top: -29rem;
+    left: -20rem;
+    z-index: 1;
+}
+
+.color2 {
+    height: 1000px;
+    width: 1000px;
+    background-image: radial-gradient(closest-side, #630f00af, #5F1818);
+    position: fixed;
+    bottom: -20rem;
+    right: -20rem;
+    z-index: 1;
+}
+
+.nav-container {
+    margin-top: 50px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    color: white;
+}
+
+.nav1 {
+    height: 1px;
+    width: 600px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.nome {
+    width: 600px;
+    height: 40px;
+    padding: 10px;
+    background-color: rgba(51, 0, 0, 0.068);
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #ffffff;
+    box-sizing: border-box;
+    border-color: #2b030300;
+}
+
+.registro {
+    width: 600px;
+    height: 40px;
+    padding: 10px;
+    background-color: rgba(51, 0, 0, 0.068);
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #ffffff;
+    box-sizing: border-box;
+    border-color: #2b030300;
+}
+
+.reg {
+    width: 600px;
+    height: 40px;
+    padding: 10px;
+    background-color: rgba(51, 0, 0, 0.068);
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #ffffff;
+    box-sizing: border-box;
+    border-color: #2b030300;
+}
+
+.nav2 {
+    height: 1px;
+    width: 600px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    margin-bottom: 10px;
+    margin-top: 40px;
+}
+
+.psw {
+    width: 600px;
+    height: 40px;
+    padding: 10px;
+    background-color: rgba(51, 0, 0, 0.068);
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #ffffff;
+    box-sizing: border-box;
+    border-color: #530000;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.recover {
+    margin-top: 50px;
+    position: fixed;
+    top: 50%;
+    right: -10%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    background-color: #2500000e;
+    color: rgba(255, 255, 255, 0.473);
+    padding: 10px;
+    font-weight: 700;
+    font-size: 30px;
+    font-family: Helvetica;
+    border: none;
+    border-radius: 9px;
+}
+
+.enter {
+    margin-top: 250px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    background-color: #8a0000;
+    color: white;
+    padding-left: 230px;
+    padding-right: 230px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: 700;
+    font-size: 30px;
+    font-family: Helvetica;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

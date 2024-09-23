@@ -1,0 +1,398 @@
+body {
+    position: relative;
+    background-color: #5f1818;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+    position: fixed;
+    width: 100%;
+    z-index: 20;
+    color: #EBF2FA;
+    margin-top: 17px;
+}
+
+.header h1 {
+    font-size: larger;
+    margin: 0;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-image {
+    width: 50px;
+    height: auto;
+    z-index: 10;
+    filter: drop-shadow(2px 2px 2px #222);
+}
+
+.bell-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.avatar {
+    margin-left: 10px;
+    width: 30px;
+    height: auto;
+}
+
+.username {
+    font-size: 3rem;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.chevron-down {
+    width: 24px;
+    height: 24px;
+    margin-right: 9vh;
+}
+
+.dropdown-menu,
+#notification-menu {
+    display: none; /* Esconde o menu por padrão */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 30; /* Certifique-se de que o z-index seja maior que o header */
+    top: 60px; /* Ajuste conforme a posição do seu header */
+    right: 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.dropdown-menu ul,
+#notification-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu ul li,
+#notification-menu ul li {
+    padding: 8px 12px;
+}
+
+.dropdown-menu ul li a,
+#notification-menu ul li {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.dropdown-menu ul li a:hover,
+#notification-menu ul li:hover {
+    background-color: #ddd;
+}
+
+.sidebar {
+    width: 250px;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+    background-color: #33333300;
+    padding-top: 20px;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.nav-menu ul li {
+    width: 100%;
+}
+
+.nav-menu ul li a {
+    display: block;
+    padding: 15px;
+    color: #EBF2FA;
+    text-decoration: none;
+    text-align: center;
+}
+
+.nav-menu ul li a:hover {
+    background-color: #58585828;
+}
+
+.wrapper {
+    top: 10.5vh;
+    left: 28vh;
+    padding: 20px;
+    background-color: #1f1f1f28;
+    height: 400px;
+    width: 1402px;
+    z-index: 2;
+    position: relative;
+    color: #E5E6E4;
+    border-radius: 20px;
+}
+
+.main-nav {
+    font-size: 2rem; /* Aumenta o tamanho da fonte */
+    text-align: start;
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
+    display: flex; /* Usar flexbox para alinhamento */
+    justify-content: space-between; /* Espaço entre o título e o botão */
+}
+
+.filter-container {
+    display: flex; /* Alinha os itens horizontalmente */
+    justify-content: space-between; /* Espaço entre os grupos */
+    margin: 20px 0; /* Espaçamento acima e abaixo do container */
+}
+
+.filter-left,
+.search-container {
+    display: flex;
+    align-items: center; /* Alinha verticalmente os elementos */
+}
+
+.filter-left input[type="date"],
+.search-container input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #E5E6E4;
+    margin-right: 10px; /* Espaçamento entre o campo e o botão */
+}
+
+.filter-left button,
+.search-container button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #E5E6E4;
+    cursor: pointer;
+}
+
+.filter-left button:hover,
+.search-container button:hover {
+    background-color: #555;
+}
+
+.ticket-list-wrapper {
+    display: flex;
+    flex-direction: column; /* Para que os elementos fiquem empilhados verticalmente */
+    align-items: stretch; /* Para que todos os elementos ocupem a largura total */
+    margin-top: 20px; /* Espaço acima da lista de pedidos */
+}
+
+.ticket-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px; /* Aumenta a altura máxima da lista */
+    overflow-y: auto; /* Permite rolagem se houver muitos itens */
+}
+
+.ticket-list li {
+    background-color: #33333350;
+    padding: 10px; /* Ajuste o padding conforme necessário */
+    margin-bottom: 1px; /* Remove o espaço entre os pedidos */
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ffffff00; /* Adiciona a borda cinza */
+}
+
+.ticket-list li span {
+    color: #E5E6E4;
+}
+
+.ticket-status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.ticket-status.pending {
+    background-color: orange;
+}
+
+.ticket-status.completed {
+    background-color: green;
+}
+
+.ticket-status.cancelled {
+    background-color: red;
+}
+
+.color1 {
+    height: 1000px;
+    width: 1400px;
+    background-image: radial-gradient(closest-side, #8a0000, #5F1818);
+    position: fixed;
+    top: -29rem;
+    left: -20rem;
+    z-index: 1;
+}
+
+.color2 {
+    height: 1000px;
+    width: 1000px;
+    background-image: radial-gradient(closest-side, #630f00af, #5F1818);
+    position: fixed;
+    bottom: -20rem;
+    right: -20rem;
+    z-index: 1;
+}
+
+#make-order-button {
+    background-color: #5f1818; /* Cor de fundo padrão */
+    color: #EBF2FA;
+    width: 9em;
+    height: 3em;
+    border-radius: 30em;
+    font-size: 15px;
+    font-family: inherit;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 6px 6px 12px #2e1b1b6b, -6px -6px 12px #ce4c4c31;
+    transition: background 0.3s ease; /* Transição suave */
+}
+
+/* Efeito de hover padrão */
+#make-order-button::before {
+    content: '';
+    width: 0;
+    height: 3em;
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #850000c2 0%, #c90000d5 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+#make-order-button:hover::before {
+    width: 9em; /* Animação do hover */
+}
+
+#make-order-button:hover {
+    background-color: #5f1818; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo quando o botão está desativado (sem permissão) */
+#make-order-button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+    box-shadow: none; /* Remove o efeito de sombra */
+}
+
+#make-order-button:disabled:hover::before {
+    width: 0; /* Remove a animação de hover */
+}
+
+.card {
+    display: block;
+    position: fixed; /* Mantém a posição fixa */
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da direita */
+    max-width: 300px; /* Limite de largura */
+    max-height: 320px; /* Limite de altura */
+    background-color: #f2f8f9; /* Cor de fundo */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 2em 1.2em; /* Espaçamento interno */
+    z-index: 100; /* Certifique-se de que fique acima de outros elementos */
+    overflow: hidden; /* Oculta o conteúdo que excede os limites */
+    margin: 0; /* Remove margem para evitar deslocamento */
+}
+
+.card:before {
+    content: '';
+    position: absolute;
+    z-index: -1; /* Fica atrás do card */
+    top: -16px;
+    right: -16px;
+    background: linear-gradient(135deg, #8b1c00, #000000);
+    height: 32px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.35s ease-out; /* Transição suave */
+}
+
+.card:hover:before {
+    transform: scale(28); /* Aumenta na interação */
+}
+
+.card:hover .small-desc {
+    transition: all 0.5s ease-out;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card:hover .card-title {
+    transition: all 0.5s ease-out;
+    color: #CFD2CD;
+}
+
+.card-title {
+    color: #262626;
+    font-size: 1.5em;
+    line-height: normal;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.small-desc {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5em;
+    color: #452c2c;
+}
+
+.go-corner {
+    cursor: pointer;
+    display: flex; /* Flexbox para centralizar o conteúdo */
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    top: 0;
+    right: 0;
+    background: linear-gradient(135deg, #c20606, #723636);
+    border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+    cursor: pointer;
+    margin-top: -4px;
+    margin-right: -4px;
+    color: #EBF2FA;
+    font-family: courier, sans;
+}
