@@ -32,8 +32,20 @@ $result = $mysqli->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Even App</title>
     <link rel="stylesheet" href="main.css">
+    <style>
+        /* Botão desabilitado (edit-button) */
+        .disabled {
+            background-color: gray;
+            color: white;
+            cursor: not-allowed;
+            pointer-events: none; /* Remove interação */
+            text-decoration: none;
+            border: 1px solid #ccc;
+            opacity: 0.6;
+        }
+    </style>
 </head>
-<body>
+<body class="unselectable">
     <div class="header">
         <div class="header-left">
             <img src="img/LEA-98acd8c0.png" alt="LEA Image" class="main-image">
@@ -47,7 +59,6 @@ $result = $mysqli->query($query);
                     <!-- Notificações serão carregadas aqui -->
                 </ul>
             </div>
-
             <img src="img/avatar.svg" alt="avatar" class="avatar">
             <h1 class="username"><?php echo $_SESSION['nome']; ?></h1>
             <input type="image" src="img/Icons - chevron-down.svg" alt="chevron-down" class="chevron-down" id="dropdown-button"/>
@@ -72,11 +83,15 @@ $result = $mysqli->query($query);
         </nav>
     </div>
 
-    <div class="wrapper">
+    <div  class="wrapper">
         <nav class="main-nav">
             <span>Lista de pedidos</span>
             <div class="button-container">
-                <button id="make-order-button">Fazer Pedido</button>
+                <button id="make-order-button" role="button" 
+                    <?php 
+                    if ($_SESSION['nivel'] < 2) echo 'disabled style="background-color: gray; cursor: not-allowed;"'; ?>>
+                    Fazer Pedido
+                </button>
             </div>
         </nav>
         <div class="filter-container">
@@ -98,6 +113,25 @@ $result = $mysqli->query($query);
                             <span>Registro: <?php echo $order['registro']; ?></span>
                             <span>Data: <?php echo $order['created_at']; ?></span>
                             <span>Local de Entrega: <?php echo $order['delivery_location']; ?></span>
+                            
+                            <?php
+                                // Verifica se o status é diferente de "aberto"
+                                if (trim($order['status']) != 'aberto') {
+                                    echo "<span>Máscara: " . $order['mask_name'] . "</span>";
+                                } else {
+                                    echo "<span>Máscara Pendente</span>";
+                                }
+                            ?>
+
+                            <span>Status: <?php echo $order['status']; ?></span>
+                            <span>
+                                <!-- Botão "Detalhes" desabilitado para nível menor que 2 -->
+                                <a 
+                                    href="<?php echo $_SESSION['nivel'] >= 2 ? "edit_order.php?ticket={$order['ticket']}" : '#'; ?>" 
+                                    class="edit-button <?php echo $_SESSION['nivel'] < 2 ? 'disabled' : ''; ?>">
+                                    Detalhes
+                                </a>
+                            </span>
                         </li>
                     <?php endwhile; ?>
                 <?php else: ?>
@@ -105,6 +139,19 @@ $result = $mysqli->query($query);
                 <?php endif; ?>
             </ul>
         </div>
+
+        <!-- Card visível apenas para usuários com nível menor que 2 -->
+        <?php if ($_SESSION['nivel'] < 2): ?>
+            <div class="card" id="permission-card" style="position: fixed; bottom: 20px; right: 20px;">
+                <p class="card-title">Sem permissão</p>
+                <p class="small-desc">
+                    Você não possui permissão para criar pedidos, entre em contato com um administrador ou com seu líder.
+                </p>
+                <div class="go-corner">
+                    <div class="go-arrow">→</div>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div class="color1" id="color1"></div>

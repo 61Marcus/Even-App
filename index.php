@@ -34,7 +34,9 @@ if(isset($_POST['email']) && isset($_POST['senha'])) {
 
                     $_SESSION['id'] = $usuario['id'];
                     $_SESSION['nome'] = $usuario['nome'];
+                    $_SESSION['email'] = $usuario['email'];
                     $_SESSION['registro'] = $usuario['registro'];
+                    $_SESSION['nivel'] = $usuario['nivel'];
 
                     header("Location: main.php");
                     exit();
